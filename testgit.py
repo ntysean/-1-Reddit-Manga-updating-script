@@ -1,9 +1,13 @@
+import sys
 import praw
+import time
+import requests
+import json
 
+CONFIG_FILE='config.json'
 
-#Check for new posts
 def check_new_posts(sub):
-    for post in r.subreddit(sub).new(limit=10):
+    for post in r.subreddit(sub).new(limit=30):
         if first is True:
             seen_posts.append(post.id)
         if config['keywords']['enabled'] and not any(x.lower() in post.title.lower() for x in config['keywords']['list']):
@@ -16,10 +20,14 @@ def check_new_posts(sub):
 def notify(subreddit, title, url):
     if config['reddit_pm']['enabled']:
         notify_reddit(subreddit, title, url)
-
+    if config['debug']:
+        print(subreddit + ' | ' + title + ' | ' +  url)
 
 def notify_reddit(subreddit, title, url):
-    subject = 'New post on /r/' + subreddit + '!'
+    if title is 'Modqueue':
+        subject = 'New item in modqueue on /r/' + subreddit + '!'
+    else:
+        subject = 'New post on /r/' + subreddit + '!'
 
     message = '[' + title + '](' + url + ')'
 
@@ -46,4 +54,14 @@ while True:
         for sub in config['subreddits']:
             if config['new_posts']:
                 check_new_posts(sub)
+                print(seen_posts)
+            time.sleep(5)
+            first = False
+    except KeyboardInterrupt:
+        print('\n')
+        sys.exit(0)
+    except Exception as e:
+        print('Error:', e)
+        time.sleep(5)
+
 
