@@ -1,0 +1,24 @@
+{ 
+  "reddit": {
+    "user_agent":"https://github.com/ntysean/PythonRedditManga",
+    "client_id":"gOLztZdjrngRlA",
+    "client_secret":"5u3X8Jgjo_lNljfqXYaXqUzc9o8",
+    "username":"mr_skeng123",
+    "password":"N19in2009epl"
+  },
+  "reddit_pm": {
+    "users": [ "mr_skeng123" ],
+    "enabled": false
+  },
+  "keywords": {
+    "list": [
+      "Heresy",
+      "bar",
+      "cat"
+    ],
+    "enabled": true
+  },
+  "debug": true,
+  "new_posts": true,
+  "subreddits": [ "manga" ]
+}
