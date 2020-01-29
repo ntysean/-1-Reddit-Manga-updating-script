@@ -1,13 +1,13 @@
 { 
   "reddit": {
     "user_agent":"https://github.com/ntysean/PythonRedditManga",
-    "client_id":"gOLztZdjrngRlA",
-    "client_secret":"5u3X8Jgjo_lNljfqXYaXqUzc9o8",
-    "username":"mr_skeng123",
-    "password":"N19in2009epl"
+    "client_id":"123",
+    "client_secret":"123",
+    "username":"123",
+    "password":"123"
   },
   "reddit_pm": {
-    "users": [ "mr_skeng123" ],
+    "users": [ "123" ],
     "enabled": false
   },
   "keywords": {
