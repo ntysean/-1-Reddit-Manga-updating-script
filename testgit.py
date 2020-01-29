@@ -7,14 +7,12 @@ import json
 CONFIG_FILE='config.json'
 
 def check_new_posts(sub):
-    for post in r.subreddit(sub).new(limit=30):
-        if first is True:
-            seen_posts.append(post.id)
+    for post in r.subreddit(sub).new(limit=5):
         if config['keywords']['enabled'] and not any(x.lower() in post.title.lower() for x in config['keywords']['list']):
             seen_posts.append(post.id)
         if post.id not in seen_posts:
             notify(sub, post.title, post.shortlink)
-        seen_posts.append(post.id)
+        print(post.title)
 
 
 def notify(subreddit, title, url):
@@ -49,19 +47,11 @@ r = praw.Reddit(
 seen_posts = []
 first = True
 
-while True:
-    try:
-        for sub in config['subreddits']:
-            if config['new_posts']:
-                check_new_posts(sub)
-                print(seen_posts)
-            time.sleep(5)
-            first = False
-    except KeyboardInterrupt:
-        print('\n')
-        sys.exit(0)
-    except Exception as e:
-        print('Error:', e)
+for sub in config['subreddits']:
+    if config['new_posts']:
+        check_new_posts(sub)
         time.sleep(5)
+        first = False
+
 
 
